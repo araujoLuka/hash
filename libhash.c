@@ -72,11 +72,30 @@ int search_key(hash_t *t1, hash_t *t2, int k)
     if(!t1->keys[index].isValid || t1->keys[index].value != k)
     {
         index = h2(k, t2->tam);
-        if(!t2->keys[index].isValid || t2->keys[index].value != k)
+        if(!t2->keys[index].isValid || !t2->keys[index].value != k)
             return -1;
-        return index;
-    }
+        return index + t1->tam;
+    }    
     return index;
+}
+
+int remove_key(hash_t *t1, hash_t *t2, int k)
+{
+    int index = search_key(t1, t2, k);
+
+    if(index == -1)
+        return 0;
+
+    if (index < t1->tam) 
+    {
+        t1->keys[index].isValid = 0;
+        t1->keys[index].value = 0;
+        return 1;
+    }
+    index -= t1->tam;
+    t2->keys[index].isValid = 0;
+    t2->keys[index].value = 0;
+    return 2;
 }
 
 void print_table(hash_t *t) 
