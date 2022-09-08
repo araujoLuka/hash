@@ -104,6 +104,6 @@ void print_table(hash_t *t)
     for (i = 0; i < t->tam; i++) 
     {
         if(t->keys[i].isValid)
-            printf("Key %2d || Value: %2d\n", i, t->keys[i].value);
+            printf("Value: %2d || Table: || Index: %2d\n", t->keys[i].value, i);
     }
 }
