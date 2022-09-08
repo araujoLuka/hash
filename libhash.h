@@ -26,6 +26,8 @@ int include_key(hash_t *t1, hash_t *t2, int k);
 
 int search_key(hash_t *t1, hash_t *t2, int k);
 
-int print_table(hash_t *t);
+int remove_key(hash_t *t1, hash_t *t2, int k);
+
+void print_table(hash_t *t);
 
 #endif
