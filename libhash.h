@@ -24,7 +24,7 @@ int h2(int k, int m);
 
 int include_key(hash_t *t1, hash_t *t2, int k);
 
-int search_key(hash_t *t1, hash_t *t2);
+int search_key(hash_t *t1, hash_t *t2, int k);
 
 int print_table(hash_t *t);
 

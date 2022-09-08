@@ -57,3 +57,26 @@ int include_key(hash_t *t1, hash_t *t2, int k)
         t2->keys[h2(k_temp.value, t2->tam)] = k_temp;
     }
 }
+
+int search_key(hash_t *t1, hash_t *t2, int k)
+{
+    int index = h1(k, t1->tam);
+    if(!t1->keys[index].isValid || t1->keys[index].value != k)
+    {
+        index = h2(k, t2->tam);
+        if(!t2->keys[index].isValid || !t2->keys[index].value != k)
+            return NULL;
+        return index;
+    }    
+    return index;
+}
+
+void print_table(hash_t *t) 
+{
+    int i;
+    for (i = 0; i < t->tam; i++) 
+    {
+        if(t->keys[i].isValid)
+            print_table("Key %2d || Value: %2d\n", t, t->keys[i].value);
+    }
+}
