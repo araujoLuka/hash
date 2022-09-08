@@ -35,7 +35,7 @@ int h1(int k, int m)
 
 int h2(int k, int m)
 {
-    return m * (int)(k * 0.9f - (k * 0.9f));
+    return m * (k * 0.9f - (int)(k * 0.9f));
 }
 
 int include_key(hash_t *t1, hash_t *t2, int k)
