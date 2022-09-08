@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#define H_TAM 11
 
 hash_t *create_hash_table()
 {
@@ -14,24 +13,17 @@ hash_t *create_hash_table()
         return NULL;
     }
 
-    if (!(t->keys = malloc(sizeof(int) * H_TAM)))
-    {
-        fprintf(stderr, "Error on keys array alocation\n");
-        free(t);
-        return NULL;
-    }
-
     t->tam = H_TAM;
-    for (int i=0; i < t->tam; i++)
-        t->keys[i] = 0;
+    for (int i=0; i < t->tam; i++) {
+        t->keys[i].value = 0;
+        t->keys[i].isValid = 0;
+    }
 
     return t;
 }
 
 hash_t *exclude_hash_table(hash_t *t)
 {
-    free(t->keys);
-    t->keys = NULL;
     free(t);
 
     return NULL;
@@ -49,17 +41,19 @@ int h2(int k, int m)
 
 int include_key(hash_t *t1, hash_t *t2, int k)
 {
-    int i, k_temp;
+    int i;
+    key_t k_temp;
 
     i = h1(k, t1->tam);
-    if (t1->keys[i] == 0)
+    if (t1->keys[i].isValid == 0)
     {
-        t1->keys[i] = k;
+        t1->keys[i].value = k;
+        t1->keys[i].isValid = 1; 
         return 1 * 100 + i;
     }
     else
     {
         k_temp = t1->keys[i];
-        t2->keys[h2(k_temp, t2->tam)] = k_temp;
+        t2->keys[h2(k_temp.value, t2->tam)] = k_temp;
     }
 }

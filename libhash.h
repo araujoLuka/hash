@@ -1,9 +1,16 @@
 #ifndef HASH_H_
 #define HASH_H_
+#define H_TAM 11
+
+typedef struct key
+{
+    int value;
+    int isValid;
+} key_t;
 
 typedef struct hash
 {
-    int *keys;
+    key_t keys[H_TAM];
     int tam;
 } hash_t;
 
