@@ -1,7 +1,6 @@
 #include "libhash.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <math.h>
 
 hash_t *create_hash_table()
 {
@@ -36,26 +35,35 @@ int h1(int k, int m)
 
 int h2(int k, int m)
 {
-    return floor(m * (k * 0.9 - floor(k * 0.9)));
+    return m * (k * 0.9f - (k * 0.9f));
 }
 
 int include_key(hash_t *t1, hash_t *t2, int k)
 {
     int i;
-    key_t k_temp;
+    node_h k_temp;
 
     i = h1(k, t1->tam);
     if (t1->keys[i].isValid == 0)
     {
         t1->keys[i].value = k;
         t1->keys[i].isValid = 1; 
-        return 1 * 100 + i;
+        return 1;
     }
-    else
+    
+    if (t1->keys[i].value != k)
     {
         k_temp = t1->keys[i];
+
+        t1->keys[i].value = k;
+        t1->keys[i].isValid = 1;
+
         t2->keys[h2(k_temp.value, t2->tam)] = k_temp;
+        
+        return 2;
     }
+
+    return 0;
 }
 
 int search_key(hash_t *t1, hash_t *t2, int k)
@@ -64,10 +72,10 @@ int search_key(hash_t *t1, hash_t *t2, int k)
     if(!t1->keys[index].isValid || t1->keys[index].value != k)
     {
         index = h2(k, t2->tam);
-        if(!t2->keys[index].isValid || !t2->keys[index].value != k)
-            return NULL;
+        if(!t2->keys[index].isValid || t2->keys[index].value != k)
+            return -1;
         return index;
-    }    
+    }
     return index;
 }
 
@@ -77,6 +85,6 @@ void print_table(hash_t *t)
     for (i = 0; i < t->tam; i++) 
     {
         if(t->keys[i].isValid)
-            print_table("Key %2d || Value: %2d\n", t, t->keys[i].value);
+            printf("Key %2d || Value: %2d\n", i, t->keys[i].value);
     }
 }

@@ -1,16 +1,17 @@
 #ifndef HASH_H_
 #define HASH_H_
+
 #define H_TAM 11
 
-typedef struct key
+typedef struct key_struct
 {
     int value;
     int isValid;
-} key_t;
+} node_h;
 
 typedef struct hash
 {
-    key_t keys[H_TAM];
+    node_h keys[H_TAM];
     int tam;
 } hash_t;
 
@@ -26,6 +27,6 @@ int include_key(hash_t *t1, hash_t *t2, int k);
 
 int search_key(hash_t *t1, hash_t *t2, int k);
 
-int print_table(hash_t *t);
+void print_table(hash_t *t);
 
 #endif
