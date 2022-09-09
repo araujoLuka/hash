@@ -3,6 +3,13 @@
 
 #define H_TAM 11
 
+typedef struct print_struct
+{
+    int key;
+    int tbl;
+    int pos;
+} print_t;
+
 typedef struct key_struct
 {
     int value;
@@ -29,6 +36,6 @@ int search_key(hash_t *t1, hash_t *t2, int k);
 
 int remove_key(hash_t *t1, hash_t *t2, int k);
 
-void print_table(hash_t *t);
+void print_table(hash_t *t1, hash_t *t2);
 
 #endif
